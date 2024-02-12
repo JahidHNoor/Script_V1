@@ -1,0 +1,73 @@
+@import url("https://fonts.googleapis.com/css?family=Abel|Aguafina+Script|Artifika|Athiti|Condiment|Dosis|Droid+Serif|Farsan|Gurajada|Josefin+Sans|Lato|Lora|Merriweather|Noto+Serif|Open+Sans+Condensed:300|Playfair+Display|Rasa|Sahitya|Share+Tech|Text+Me+One|Titillium+Web");
+
+/* 	under-construction link */
+
+#under-construction {
+  background: var(--light);
+  text-align: center;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 2rem auto;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 24px;
+}
+
+.under-construction-details {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 10px;
+  height: auto;
+}
+
+#under-construction .under-construction-details h1 {
+  font-family: "Farsan", cursive;
+  display: inline-block;
+  position: relative;
+  font-size: 30px;
+  color: var(--dark);
+  margin: 0;
+}
+
+
+.under-construction-img {
+    align-items: center;
+    justify-content: center;
+  transition: all 0.3s ease-out;
+  display: flex;
+  /* display: inline-block; */
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+}
+
+#under-construction img {
+  width: 100%;
+  height: 100%;
+}
+
+.under-construction-img:hover img {
+  transition: all 0.3s ease-out;
+}
+
+.under-construction-img:hover img {
+  transform: scale(1.2, 1.2);
+}
+
+/* Media Querries  */
+@media screen and (max-width: 768px) {
+  #under-construction {
+    grid-template-columns: 1fr;
+  }
+
+  .under-construction-details {
+    padding: 25px;
+  }
+  #under-construction .under-construction-details h1 {
+    font-size: 25px;
+  }
+}

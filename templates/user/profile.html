@@ -1,0 +1,109 @@
+{% extends "user/base.html" %}
+
+{% block title %}Profile{% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<link rel="stylesheet" href="/static/css/user/profile.css">
+<link href="/static/vendor/beautyToast/beautyToast.css" rel="stylesheet">
+
+{% endblock stylesheets %}
+
+{% block page_name %}Profile{% endblock page_name %}
+
+{% block content %}
+
+{% include 'includes/beautyToast.html' %}
+
+<div class="user__profile-details">
+
+    <div class="user__profile-img">
+        <img src="/static/img/robogirl.jpg" alt="Profile Image">
+    </div>
+    <div class="user__profile-text">
+        <span class="user__username">Hello, {{ request.user.username }} </span>
+        <div class="information">
+            <!-- Box 1 -->
+            <div class="info-box">
+                <i class='bx bxs-user' ></i>
+                <span> {{ request.user.first_name }} {{ request.user.last_name }} </span>
+            </div>
+            <!-- Box 2 -->
+            <div class="info-box">
+                <i class='bx bxs-envelope' ></i>
+                <span class="user__email" title=" {{ request.user.email }} "> {{ request.user.email }} </span>
+            </div>
+            <!-- Box 3 -->
+            <div class="info-box">
+                <i class='bx bxs-user-voice'></i>
+                <span>Referred by: {{ request.user.profile.referred_by }}</span>
+            </div>
+            <div class="info-box">
+                <i class='bx bxs-check-shield'></i>
+                {% if request.user.profile.is_account_banned %}
+                <span>Account status: Banned <i class='bx bx-x-circle user__banned'></i></span>
+
+                {% else %}
+                <span>Account status: All OK <i class='bx bx-check-circle user__all-ok'></i></span>
+
+                {% endif %}
+                
+            </div>
+            <div class="info-box">
+                <i class='bx bxs-user-check'></i>
+                {% if request.user.profile.is_email_verified %}
+                <span>Email status: Verified <i class='bx bx-check-circle user__all-ok'></i></span>
+                
+                {% else %}
+                <span>Email status: Not Verified <i class='bx bx-x-circle user__banned'></i></span>
+                
+                {% endif %}
+                
+            </div>
+        </div>
+        <div class="update__button">
+            <a href="{% url 'settings' %}" class="button button__settings button--flex">
+              <i class='bx bxs-cog button__settings-icon'></i>
+              Edit Profile
+              
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="user_level-container">
+
+    <div class="ads-codes">{{ profile_left }}</div>
+
+    <div class="progressbar-container">
+        <div class="circular-progress">
+            <div class="value-container">0%</div>
+        </div>
+
+        {% if level_up_button == "show" %}
+        <form method="post" class="claim__user_level">
+            {% csrf_token %}
+            <div class="claim__div" id="claim-button-div">
+                <button type="submit" class="claim__button " id= "claim-button" >
+                    <span class="button__text" id="button-text"><i class='bx bxs-chevrons-up'></i> Upgrade Level</span>
+                </button>
+            </div>
+            {% endif %}
+        </form>
+        <p class="level_message"><i class='bx bx-send'></i> {{ level_message }} </p>
+        <p id="progress_percent">{{ progress_percent }} </p>
+    </div>
+
+    <div class="ads-codes">{{ profile_right }}</div>
+
+</div>
+
+
+{% endblock content %}
+
+
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}
+<script src="/static/js/user/profile.js"></script>
+{% endblock javascripts %}

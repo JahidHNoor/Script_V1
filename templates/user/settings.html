@@ -1,0 +1,59 @@
+{% extends "user/base.html" %}
+{% block title %}Settings{% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<link rel="stylesheet" href="/static/css/user/settings.css" />
+<link href="/static/vendor/beautyToast/beautyToast.css" rel="stylesheet" />
+
+{% endblock stylesheets %}
+{% block page_name %}Settings{% endblock page_name %}
+
+{% block content %}
+{% include 'includes/beautyToast.html' %}
+
+<div class="update_information_container">
+  <div class="update_information_items">
+    <!-- Name Update Form -->
+    <form class="form_container" method="post">
+      {% csrf_token %}
+      <div class="logo_container">
+        <img src="/static/img/robogirl.jpg" alt="Profile Image" />
+      </div>
+      <div class="title_container">
+        <p class="title">Update your Account Information</p>
+      </div>
+      <br />
+      <div class="input_container">
+        <label class="input_label" for="email_field">First Name</label>
+        <i class="bx bxs-user-pin icon"></i>
+        <input placeholder="Your First Name" name="fname" type="text" class="input_field" value="{{ request.user.first_name }}"/>
+      </div>
+      <div class="input_container">
+        <label class="input_label" for="password_field">Last Name</label>
+        <i class="bx bxs-user-pin icon"></i>
+        <input placeholder="Your Last Name" title="Inpit title" name="lname" type="text" class="input_field" value="{{ request.user.last_name }}"/>
+      </div>
+      <button type="submit" class="update_btn">
+        <span>Update</span>
+      </button>
+    </form>
+    <!-- End of Name Update Form -->
+    
+    <div class="separator">
+      <hr class="line" />
+      <span>Or</span>
+      <hr class="line" />
+    </div>
+    <div class="ads-codes">{{ settings_before_pass_reset }}</div>
+    <a href="{% url 'password_reset' %}" class="change_pass">
+      <i class="bx bxs-lock"></i>
+      <span>Change Password</span>
+    </a>
+  </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %} {% endblock javascripts %}

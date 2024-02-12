@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/static/img/favicon.png"/>
+
+    <!-- Vendor CSS Files -->
+    <link href="/static/vendor/icons/css/boxicons.min.css" rel="stylesheet">
+    
+    <!-- ===== CSS ===== -->
+    <link href="/static/css/home/login_register.css" rel="stylesheet">
+    <link href="/static/css/includes/scss/alert/alerts.css" rel="stylesheet">
+</head>
+<body>
+    
+    <div class="container">
+        <div class="forms">
+
+          <!--  Log in form -->
+
+            <div class="form login">
+                <span class="title">Login</span>
+                {% include 'includes/alerts.html' %}
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="input-field">
+                        <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                        <i class='bx bxs-user-circle'></i>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" id="password" name="password" class="password" placeholder="Enter your password" required>
+                        <i class='bx bxs-lock'></i>
+                        <i class="bx bx-hide showHidePw"></i>
+                    </div>
+                    <div class="captcha_field">
+                        {{ captcha.captcha }}
+                    </div>
+                    <div class="checkbox-text">
+                        <a href="{% url 'password_reset' %}" class="text">Forgot password?</a>
+                    </div>
+
+                    <div class="input-field button">
+                        <input type="submit" value="Login">
+                    </div>
+                </form>
+
+                <div class="login-signup">
+                    <span class="text">Not a member?
+                        <a href="{% url 'register' %}" class="text">Signup Now</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ===== JAVASCRIPTS ===== -->
+    <script src="/static/js/home/login_register.js"></script>
+    <script src="/static/js/includes/alerts.js"></script>
+</body>
+</html>
+

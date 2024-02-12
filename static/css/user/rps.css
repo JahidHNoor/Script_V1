@@ -1,0 +1,131 @@
+/* Rock Paper Scissors Container */
+.rps_body {
+  /* display: grid; */
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-gap: 24px;
+  margin-top: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--grey);
+}
+::selection {
+  color: #fff;
+  background-color: #7d2ae8;
+}
+.rps_container {
+  padding: 3rem;
+  border-radius: 14px;
+  background: var(--light);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+.result_images {
+  display: flex;
+  column-gap: 5rem;
+}
+.rps_container.start .user_result {
+  transform-origin: left;
+  animation: userShake 0.7s ease infinite;
+}
+@keyframes userShake {
+  50% {
+    transform: rotate(10deg);
+  }
+}
+
+.rps_container.start .cpu_result {
+  transform-origin: right;
+  animation: cpuShake 0.7s ease infinite;
+}
+@keyframes cpuShake {
+  50% {
+    transform: rotate(-10deg);
+  }
+}
+.result_images img {
+  width: 100px;
+}
+.user_result img {
+  transform: rotate(90deg);
+}
+.cpu_result img {
+  transform: rotate(-90deg) rotateY(180deg);
+}
+.result {
+  text-align: center;
+  font-size: 2rem;
+  color: #7d2ae8;
+  margin-top: 1.5rem;
+}
+
+.option_image img {
+  width: 50px;
+}
+.option_images {
+  display: flex;
+  align-items: center;
+  margin-top: 2.5rem;
+  justify-content: space-between;
+}
+.rps_container.start .option_images {
+  pointer-events: none;
+}
+.option_image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0.4;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+.option_image:hover {
+  opacity: 1;
+}
+.option_image.active {
+  opacity: 1;
+}
+.option_image img {
+  pointer-events: none;
+}
+.option_image p {
+  color: #7d2ae8;
+  font-size: 1.235rem;
+  margin-top: 1rem;
+  pointer-events: none;
+}
+
+/* Post form starts from here  */
+.rps__send-result-backend {
+  display: none;
+}
+
+/* Media Queries */
+
+@media screen and (max-width: 576px) {
+  .rps_body {
+    grid-template-columns: 1fr;
+  }
+
+  .rps_container {
+    padding: 2rem;
+  }
+
+  .result_images img {
+    width: 70px;
+  }
+
+  .result_images {
+    column-gap: 3.5rem;
+  }
+
+  .option_image img {
+    width: 40px;
+  }
+
+  .option_image p {
+    color: #7d2ae8;
+    font-size: 1rem;
+    margin-top: 1rem;
+    pointer-events: none;
+  }
+}

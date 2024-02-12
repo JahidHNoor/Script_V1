@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+      <!-- Favicons -->
+<link rel="icon" type="image/x-icon" href="/static/img/favicon.png" />
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+<!-- Vendor CSS Files -->
+<link href="/static/vendor/icons/css/boxicons.min.css" rel="stylesheet">
+<link href="/static/vendor/swiper/css/swiper-bundle.min.css" rel="stylesheet">
+<link href="/static/vendor/aos/aos.css" rel="stylesheet">
+
+<!-- Template Main CSS File -->
+<link href="/static/css/home/home.css" rel="stylesheet">
+
+</head>
+
+
+<body>
+    
+  <!-- ======= Header ======= -->
+<header class="header" id="header">
+  <nav class="nav container">
+    <a href="#" class="nav__logo">{{ website_name }}</a>
+
+    <div class="nav__menu" id="nav-menu">
+      <ul class="nav__list grid">
+        <li class="nav__item">
+          <a href="#home" class="nav__link active-link">
+            <i class='bx bxs-home-heart nav__icon'></i> Home
+          </a>
+        </li>
+        <li class="nav__item">
+          <a href="#stats" class="nav__link">
+            <i class='bx bxs-bar-chart-square nav__icon'></i> Stats
+          </a>
+        </li>
+        <li class="nav__item">
+          <a href="#features" class="nav__link">
+            <i class='bx bxs-widget nav__icon'></i> Features
+          </a>
+        </li>
+        <li class="nav__item">
+          <a href="#contact-us" class="nav__link">
+            <i class='bx bxs-conversation nav__icon'></i> Contact Us
+          </a>
+        </li>
+      </ul>
+      <i class='bx bx-x nav__close' id="nav-close"></i>
+    </div>
+    <div class="nav__btns">
+       <!-- Theme Change Button -->
+      <i class='bx bxs-moon change-theme' id="theme-button"></i>
+      <div class="nav__toggle" id="nav-toggle">
+        <i class='bx bxs-grid-alt'></i>
+      </div>
+    </div>
+  </nav>
+</header>
+<!-- End Header -->
+
+
+<!-- ======= Main ======= -->
+<main class="main">
+<!-- ======= Home ======= -->
+<section class="home section" id="home">
+  <div class="home__container container grid">
+    <div class="home__content grid">
+      <div class="home__features-box" data-aos="fade-right">
+        <div class="home_features">
+          <a href="#support" class="home__features-icon">
+            <i class='bx bx-support'></i>
+          </a>
+        </div>
+      </div>
+      <div class="home__img" data-aos="fade-left" data-aos-delay="200">
+        <img src="/static/img/hero-img.png" class="animated" >        
+      </div>
+
+      <div class="home__data" data-aos="fade-up" data-aos-delay="400">
+        <h2 class="home__title">Welcome to<br>{{ website_name }}</h2>
+        {% include 'includes/sweetalert.html' %}
+        <p class="home__description"> {{ website_description }} </p>
+
+        {% if user.is_authenticated %}
+
+        <div class="home__buttons">
+          <a href="{% url 'dashboard' %}" class="button button--dashboard button--flex">
+            <i class='bx bxs-dashboard button__logged-icon'></i>
+            Go to Dashboard
+          
+          </a>
+        </div>
+
+        {% else %}
+        <div class="home__buttons">
+          <a href="{% url 'login' %}" class="button button--login button--flex">Login
+            <i class='bx bx-log-in-circle button__icon'></i>
+          </a>
+          <a href="{% url 'register' %}" class="button button--flex button--register">Register
+            <i class='bx bx-user-plus button__icon'></i>
+          </a>
+        </div>
+        {% endif %}
+      </div>
+    </div>      
+    <div class="home__scroll" data-aos="zoom-in">
+      <a href="#stats" class="home__scroll-button button--flex">
+        <i class='bx bx-mouse home__scroll-mouse'></i>
+        <span class="home__scroll-name">Scroll Down</span>
+        <i class='bx bx-down-arrow-alt home__scroll-arrow'></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ======= Stats ======= -->
+
+<section class="stats section" id="stats">
+  <div class="ads-codes">{{ home_before_stats }}</div>
+  <h2 class="section__title" data-aos="fade-up">Statistics</h2>
+  <div class="stats__container container grid" >
+    <img src="/static/img/stats.jpg" alt="" class="stats__img" data-aos="zoom-in">
+  
+    <div class="stats__data" data-aos="zoom-in">
+      <div class="stats__info">
+        <div class="stats__box">
+          <i class='bx bx-wink-smile stats__icon'></i>
+          <h3 class="stats__count"> {{ website_total_users }} </h3>
+          <span class="stats__title">Happy Users</span>
+        </div>
+        <div class="stats__box">
+          <i class='bx bxs-coupon stats__icon'></i>
+          <h3 class="stats__count"> {{ website_total_tokens_claimed }} </h3>
+          <span class="stats__title">Tokens Earned</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ======= Features ======= -->
+
+<section class="features section" id="features"> 
+  <h2 class="section__title" data-aos="fade-up">Features</h2>
+  <div class="features__container container grid" >
+
+    {% if features %}
+    {% for f in features %}
+    {% comment %} feature 1 {% endcomment %}
+    <div class="features__content" data-aos="zoom-in">
+      <div>
+        <i class='{{ f.feature_icon }} features__icon'></i>
+        <h3 class="features__title"> {{ f.feature_title }} </h3>
+      </div>
+      <span class="button button--flex button--small button--link features__button">
+        view more
+        <i class='bx bx-right-arrow-alt button__icon'></i>  
+      </span>
+    </div>
+    <div class="features__modal">
+      <div class="features__modal-content">
+        <h4 class="features__modal-title">{{ f.feature_title }}</h4>
+        <i class='bx bx-x-circle features__modal-close'></i>
+        <p>{{ f.feature_description }}</p>
+      </div>
+    </div>
+    {% endfor %} 
+    {% endif %}
+  </div>
+</section>
+
+
+<!-- ======= Support ======= -->
+<section class="support section" id="support">
+  <div class="support__bg" data-aos="zoom-in">
+    <div class="support__container container grid">
+      <div class="support__data">
+        <h2 class="support__title">24/7 Support Available</h2>
+        <p class="support__description">
+          If you are facing any problems plz join our Telegram group for 24/7 support and other discussion. You can also get updates via telegram.
+        </p>
+        <a href="#telegram-group-link" class="button button--flex button--white">
+          Join Telegram group
+          <i class='bx bxl-telegram support__icon button__icon'></i>
+        </a>
+      </div>
+      <img src="/static/img/support.svg" alt="" class="support__img">
+    </div>
+  </div>
+</section>
+
+
+<!-- ======= Contact Us ======= -->
+
+
+<!-- ======= Footer ======= -->
+<section class="footer">
+  <div class="footer__bg">
+    <div class="footer__container container grid">
+      <div>
+        <h1 class="footer__title">{{ website_name }}</h1>
+        <span class="footer__subtitle"> {{ website_description }} </span>
+      </div>
+
+      <ul class="footer__links">
+        <li>
+          <a href="#stats" class="footer__link">Statistics</a>
+        </li>
+
+        <li>
+          <a href="#features" class="footer__link">Features</a>
+        </li>
+
+        <li>
+          <a href="#withdrawal-options" class="footer__link">Withdrawal Options</a>
+        </li>
+      </ul>
+
+      <div class="footer__socials">
+        <a href="#telegram" target="_blank" class="footer__social">
+          <i class='bx bxl-telegram'></i>
+        </a>
+      </div>
+    </div>
+
+    <p class="footer__copyright">
+
+      Code with <i class='bx bxs-heart footer__love'></i> <br/>
+      &#169; <span id="currentYear"></span> {{ website_name }}.<br>All rights reserved.
+    
+    </p>
+  </div>
+</section>
+
+</main>
+
+<!-- End Main -->
+
+
+<!-- ======= Scroll top ======= -->
+<a href="#" class="scrollup" id="scroll-up" data-aos="fade-up">
+  <i class='bx bx-up-arrow-alt scrollup__icon'></i>
+</a>
+
+<!-- End Heade -->
+  
+  <script src="/static/vendor/swiper/js/swiper-bundle.min.js"></script>
+  <script src="/static/js/home/home.js"></script>
+  <script src="/static/vendor/aos/aos.js"></script>
+  <script>
+    AOS.init({
+      offset: 0,
+      duration: 1000,
+      easing: 'ease-in-sine',
+    });
+  </script>
+
+</body>
+</html>

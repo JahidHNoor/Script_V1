@@ -1,0 +1,13 @@
+
+{% if messages %}
+{% for message in messages %}
+
+<div {% if message.tags %} class="alert {{ message.tags }}-alert"{% endif %} id="alert">
+  <h3 class="alert__message">{{message}}</h3>
+  <a class="alert-close">
+    <i class='bx bx-x-circle'></i>
+  </a>
+</div>
+
+{% endfor %}
+{% endif %}

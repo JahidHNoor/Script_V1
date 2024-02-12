@@ -1,0 +1,176 @@
+{% extends "user/base.html" %}
+
+{% block title %} Dashboard {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<link rel="stylesheet" href="/static/css/user/dashboard.css" />
+<link href="/static/vendor/beautyToast/beautyToast.css" rel="stylesheet" />
+{% endblock stylesheets %}
+{% block dashboard_active %}active{% endblock dashboard_active %}
+{% block page_name %}Dashboard{% endblock page_name %} 
+
+{% block content %} 
+
+{% include 'includes/beautyToast.html' %}
+
+<!-- Box of showing setting Data -->
+<ul class="box-info">
+    <li>
+      <i class='bx bxs-coupon'></i>
+      <span class="text">
+        <h3>{{ balance }}</h3>
+        <p>User Balance</p>
+      </span>
+    </li>
+    <li>
+      <i class="bx bxs-chevrons-up"></i>
+      <span class="text">
+        <h3>{{ request.user.profile.level }}</h3>
+        <p>Current Level</p>
+      </span>
+    </li>
+    <li>
+      <i class="bx bxs-bolt"></i>
+      <span class="text">
+        <h3>{{ energy }}</h3>
+        <p>Energy</p>
+      </span>
+    </li>
+    <li>
+      <i class='bx bxs-certification'></i>
+      <span class="text">
+        <h3>{{ request.user.profile.exp }}</h3>
+        <p>Exp Points</p>
+      </span>
+    </li>
+    <li>
+      <i class="bx bxs-group"></i>
+      <span class="text">
+        <h3>{{ total_referrals }}</h3>
+        <p>Total Referrals</p>
+      </span>
+    </li>
+    <li>
+      <i class='bx bxs-megaphone'></i>
+      <span class="text">
+        <h3>{{ advertiser_balance }}</h3>
+        <p>Advertiser Balance</p>
+      </span>
+    </li>
+</ul>
+
+<div class="ads-codes">{{ dashboard_after_stats }}</div>
+
+
+<!-- Claim Referral Rewards Container -->
+
+
+<div class="referral_rewards_container">
+
+  <div class="referral_rewards_left_ad"></div>
+  
+  <div class="referral_rewards">
+      <span class="referral_rewards_header">Claim Your Referral Rewards</span>
+      <div class="referral_rewards__amount">
+          <p id="referral-rewards-amount"> {{ referral_rewards }} </p>
+      </div>
+
+      <form method="post" class="claim__referral_rewards">
+          {% csrf_token %}
+          <div class="claim__div"  id="claim-button-div">
+              <button disabled type="submit" class="claim__button " id= "claim-button">
+                  <span class="button__text" id="button-text"><i class='bx bxs-gift'></i> Collect Rewards</span>
+              </button>
+          </div>
+      </form>
+  </div>
+  
+  <div class="referral_rewards_right_ad"></div>
+
+</div>
+
+
+<!-- referral link -->
+
+<div id="referral">
+
+    <div class="referral-img">
+      <img src="/static/img/referral-img.jpg" alt="referral image" />
+    </div>
+
+    <div class="referral-details">
+        <h1>Your referral Link</h1>
+
+        <p class="referral-information">Reffer your friends to earn 10% comission.</p>
+        <input class="referral-link" id="referral-link" value="{{ current_site }}/ref-code/{{ request.user.profile.referral_code }}" readonly>
+
+        <div class="referral-control">
+            <!-- Start Button buying -->
+            <button class="referral-btn" id="referral-btn">
+                <i class='bx bxs-copy-alt icon'></i>
+                <span class="copy-referral" id="copy-referral">Copy Now</span>
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<div class="ads-codes">{{ dashboard_before_referrals }}</div>
+<!--  Referred Accounts -->
+
+<div class="pp__table container">   
+  <div class="table__header">
+    <h1>Your Referrals</h1>
+  </div>
+  <div class="table__body">
+    <table>
+        <thead>
+            <tr>
+                <th> Sr. No. </th>
+                <th> UserID </th>
+                <th> Level </th>
+            </tr>
+        </thead>
+        {% if my_referrals %}
+        <tbody>
+
+          {% for p in my_referrals %}
+
+            <tr>
+                <td> {{forloop.counter}} </td>
+                <td> {{p.user}} </td>
+                <td> <strong> {{p.level}} </strong></td>                        
+            </tr>
+            
+            {% endfor %}
+            
+        </tbody>
+        {% endif %}
+    </table>
+  </div>
+</div> 
+
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %} 
+<script src="/static/js/user/dashboard.js"></script>
+
+{% comment %} <script>
+    // Copy Referral Code
+    let referralBox = document.getElementById("referral-link");
+    let referralButton = document.getElementById("referral-btn");
+    let changeCopyText = document.getElementById("copy-referral");
+
+    referralButton.onclick = function() {
+      referralBox.select();
+      document.execCommand("copy");
+      changeCopyText.innerText = "Codes Copied"
+    }
+
+</script> {% endcomment %}
+
+
+{% endblock javascripts %}

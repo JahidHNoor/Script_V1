@@ -1,0 +1,14 @@
+<script src="/static/vendor/beautyToast/beautyToast.js"></script>
+	
+<script>
+{% if messages %}
+{% for message in messages %}
+{% if message.tags %}
+beautyToast.{{ message.tags }}({
+    title: '{{ message.tags }}', // Set the title of beautyToast
+    message: '{{ message }}', // Set the message of beautyToast
+  })
+{% endif %}
+{% endfor %}
+{% endif %}
+</script>

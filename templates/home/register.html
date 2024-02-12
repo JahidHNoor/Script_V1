@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/static/img/favicon.png"/>
+
+    <!-- Vendor CSS Files -->
+    <link href="/static/vendor/icons/css/boxicons.min.css" rel="stylesheet">
+    
+    <!-- ===== CSS ===== -->
+    <link href="/static/css/home/login_register.css" rel="stylesheet">
+    <link href="/static/css/includes/scss/alert/alerts.css" rel="stylesheet">
+
+         
+</head>
+<body>
+    
+    <div class="container">
+        <div class="forms">
+
+            <!-- Registration Form -->
+            <div class="form signup">
+                <span class="title">Registration</span>
+                {% include 'includes/alerts.html' %}
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="input-field">
+                        <input type="text" id="fname" name="fname" placeholder="Enter your first name" required>
+                        <i class='bx bxs-user-pin'></i>
+                    </div>
+                    <div class="input-field">
+                        <input type="text" id="lname" name="lname" placeholder="Enter your last name" required>
+                        <i class='bx bxs-user-pin'></i>
+                    </div>
+                    <div class="input-field">
+                        <input type="text" id="username" name="username" placeholder="Choose a unique username" required>
+                        <i class='bx bxs-user-circle'></i>
+                    </div>
+                    <div class="input-field">
+                        <input type="text" id="email" name="email" placeholder="Enter your email" required>
+                        <i class='bx bx-envelope'></i>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" id="pass1" name="pass1" class="password" placeholder="Create a password" required>
+                        <i class='bx bxs-lock'></i>
+                        <i class="bx bx-hide showHidePw"></i>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" id="pass2" name="pass2" class="password" placeholder="Confirm password" required>
+                        <i class='bx bxs-lock'></i>
+                        <i class="bx bx-hide showHidePw"></i>
+                    </div>
+                    <div class="captcha_field">
+                        {{ captcha.captcha }}
+                    </div>
+                    <div class="checkbox-text">
+                        <div class="checkbox-content">
+                            <input type="checkbox" id="termCon" required>
+                            <label for="termCon" class="text">I accepted all terms and conditions</label>
+                        </div>
+                    </div>
+
+                    <div class="input-field button">
+                        <input type="submit" value="Signup">
+                    </div>
+                </form>
+
+                <div class="login-signup">
+                    <span class="text">Already a member?
+                        <a href="{% url 'login' %}" class="text">Login Now</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ===== JAVASCRIPTS ===== -->
+    <script src="/static/js/home/login_register.js"></script>
+    <script src="/static/js/includes/alerts.js"></script>
+</body>
+</html>
+

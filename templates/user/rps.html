@@ -1,0 +1,125 @@
+{% extends "user/base.html" %}
+
+{% block title %}Rock Paper Scissors{% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<link rel="stylesheet" href="/static/css/user/rps.css">
+
+{% endblock stylesheets %}
+{% block rps_active %}active{% endblock rps_active %}
+{% block page_name %}Rock Paper Scissors{% endblock page_name %}
+
+{% block content %}
+
+<!-- Check the status of the page -->
+{% if feature_rps %}
+<!-- Box of showing setting Data -->
+<ul class="box-info">
+    <li>
+        <i class='bx bxs-coupon'></i>
+        <span class="text">
+            <h3>{{ rps_token }}</h3>
+            <p>Token Rewards</p>
+        </span>
+    </li>
+    <li>
+        <i class='bx bxs-badge-dollar'></i>
+        <span class="text">
+            <h3 class="level_bonus">+{{ level_bonus }}</h3>
+            <p>Level Bonus</p>
+        </span>
+    </li>
+    <li>
+        <i class="bx bxs-bolt"></i>
+        <span class="text">
+            <h3>{{ rps_energy_cost }}</h3>
+            <p>Energy Cost</p>
+        </span>
+    </li>
+</ul>
+
+
+<!-- Rock Paper Scissors Container -->
+<div class="rps_body">
+    <div class="rps_container">
+        <div class="result_field">
+            <div class="result_images">
+                <span class="user_result">
+                <img src="/static/img/rps/rock.png" alt="" />
+                </span>
+                <span class="cpu_result">
+                <img src="/static/img/rps/rock.png" alt="" />
+                </span>
+            </div>
+            <div class="result">Let's Play!!</div>
+        </div>
+
+        <div class="option_images">
+            <span class="option_image">
+                <img src="/static/img/rps/rock.png" alt="" />
+                <p>Rock</p>
+            </span>
+            <span class="option_image">
+                <img src="/static/img/rps/paper.png" alt="" />
+                <p>Paper</p>
+            </span>
+            <span class="option_image">
+                <img src="/static/img/rps/scissors.png" alt="" />
+                <p>Scissors</p>
+            </span>
+        </div>
+    </div>
+</div>
+
+<!-- POST Form --> 
+<form method="post" class="rps__send-result-backend" id="rps-form">
+    {% csrf_token %}
+    <input type="text" class="hide__input-display" name="current-time" id="current-time" value="">
+    <input type="text" class="hide__input-display" name="rps-result" id="rps-result" value="">
+    <div class="claim__div">
+        <button type="submit" class="claim__button" id="claim-button">
+            <span class="button__text" id="button-text"><i class='bx bxs-gift'></i> Collect Rewards</span>
+        </button>
+    </div>
+</form>
+
+{% else %}
+{% include 'includes/under_maintenance.html' %}
+{% endif %}
+{% endblock content %}
+
+
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}
+<script src="/static/vendor/JQuery/JQuery.min.js"></script>
+<script src="/static/vendor/sweetalert/sweetalert2.min.js"></script>
+<script src="/static/js/user/rps.js"></script>
+<script type="text/javascript">
+
+$(document).on('submit','#rps-form',function(e){
+    e.preventDefault();
+    $.ajax({
+        type:'POST',
+        url:'{% url "rps" %}',
+        data:
+        {
+            current_time:$("#current-time").val(),
+            rps_result:$("#rps-result").val(),
+            csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+        },
+            success: function(message){
+                Swal.fire({
+
+                    icon: message.icon_type,
+                    title: message.message_type,
+                    text: message.return_message,
+                  })
+                }
+        })
+    });
+</script>
+{% endblock javascripts %}
+
+

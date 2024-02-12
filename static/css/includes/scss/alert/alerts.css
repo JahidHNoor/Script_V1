@@ -1,0 +1,70 @@
+@import url("https://fonts.googleapis.com/css?family=Quicksand&display=swap");
+.alert {
+  width: 100%;
+  margin: 20px auto;
+  padding: 15px 0 15px 10px;
+  position: relative;
+  border-radius: 5px;
+}
+
+.alert__message {
+  font-family: Quicksand;
+  width: calc(100% - 15px);
+}
+
+.alert.hide {
+  display: none;
+}
+
+.alert-close {
+  position: absolute;
+  right: 4px;
+  top: 1px;
+  font-size: 1.6em;
+  cursor: pointer;
+}
+
+.simple-alert {
+  background-color: #ebebeb;
+  border-left: 5px solid #6c6c6c;
+}
+.simple-alert .alert-close {
+  border-color: #6c6c6c;
+  color: #6c6c6c;
+}
+
+.success-alert {
+  background-color: #a8f0c6;
+  border-left: 5px solid #178344;
+}
+.success-alert .alert-close {
+  border-color: #178344;
+  color: #178344;
+}
+
+.danger-alert {
+  background-color: #f7a7a3;
+  border-left: 5px solid #8f130c;
+}
+.danger-alert .alert-close {
+  border-color: #8f130c;
+  color: #8f130c;
+}
+
+.error-alert {
+  background-color: #f7a7a3;
+  border-left: 5px solid #8f130c;
+}
+.error-alert .alert-close {
+  border-color: #8f130c;
+  color: #8f130c;
+}
+
+.warning-alert {
+  background-color: #ffd48a;
+  border-left: 5px solid #8a5700;
+}
+.warning-alert .alert-close {
+  border-color: #8a5700;
+  color: #8a5700;
+}/*# sourceMappingURL=alerts.css.map */

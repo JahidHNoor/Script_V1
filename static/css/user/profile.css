@@ -1,0 +1,241 @@
+/* Profile details section  */
+#content .user__profile-details {
+  position: relative;
+  background-color: var(--light);
+  width: 100%;
+  display: grid;
+  padding: 1rem;
+  border-radius: 1rem;
+  color: var(--dark);
+  grid-template-columns: 1fr 2fr;
+  align-items: center;
+  gap: 1rem;
+}
+
+#content .user__profile-img {
+  margin: auto;
+}
+
+#content .user__profile-img img {
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  border: solid 5px var(--blue);
+  border-radius: 50%;
+}
+#content .user__profile-text {
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#content .user__profile-text .user__username {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.user__profile-text .information {
+  margin: 1rem 0 1.4rem;
+}
+
+.user__profile-text .information .info-box {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+.user__profile-text .information .info-box .bx {
+  font-size: 20px;
+}
+.user__profile-text .information .info-box span {
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  margin-left: 0.5rem;
+}
+
+.user__profile-details .info-box .user__banned {
+  color: #ff0000;
+  padding-left: 2px;
+}
+
+.user__profile-details .info-box .user__all-ok {
+  color: #18c401;
+  padding-left: 2px;
+}
+
+.user__profile-text .user__email {
+  width: 90%;
+  overflow: hidden;
+  position: relative;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#content .update__button {
+  width: 100%;
+  margin-top: 2rem;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+#content .button__settings-icon {
+  font-size: 1.25rem;
+  margin-right: 0.25rem;
+  transition: 0.3s;
+}
+
+#content .button__settings {
+  border: 2px solid #38b9ff;
+  background-color: #38b9ff;
+}
+
+#content .button__settings:hover {
+  background-color: transparent;
+  color: var(--dark);
+  border: 2px solid #38b9ff;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Upgrade Container  */
+
+#content .user_level-container {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  grid-gap: 24px;
+  margin-top: 36px;
+}
+
+#content .progressbar-container {
+  padding: 20px;
+  background-color: var(--light);
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+}
+#content .circular-progress {
+  position: relative;
+  height: 250px;
+  width: 250px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+#content .circular-progress:before {
+  content: "";
+  position: absolute;
+  height: 84%;
+  width: 84%;
+  background-color: #ffffff;
+  border-radius: 50%;
+}
+#content .value-container {
+  position: relative;
+  font-family: "Poppins", sans-serif;
+  font-size: 50px;
+  color: #231c3d;
+}
+
+.hide__input-display {
+  display: none;
+}
+
+.user_level_wait {
+  display: none;
+}
+
+.claim__div {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.2rem;
+  padding: 3px;
+}
+
+.claim__div .claim__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  background-image: linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ddeb);
+  color: #fff;
+  padding: 3px;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 20px;
+  letter-spacing: 0.05rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.claim__div .claim__button span {
+  background: #000446;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 6px;
+  width: 100%;
+  height: 100%;
+  transition: all 0.3s ease;
+}
+
+.claim__div .claim__button:hover {
+  transform: translateY(-3%);
+}
+
+.claim__div i {
+  margin-right: 10px;
+  width: 0.9rem;
+  fill: currentColor;
+}
+
+.progressbar-container .level_message {
+  font-size: 25;
+  font-weight: 400;
+  color: var(--dark);
+  margin: 0.5rem;
+}
+
+.progressbar-container #progress_percent {
+  display: none;
+}
+
+/* Media Queries */
+@media screen and (max-width: 576px) {
+  #content .user__profile-details {
+    grid-template-columns: 1fr;
+  }
+
+  #content .user__profile-img img {
+    width: 160px;
+    height: 160px;
+  }
+
+  #content .user__profile-text {
+    padding: 0px;
+  }
+
+  .user__profile-text .information .info-box .bx {
+    padding-top: 3px;
+    font-size: 15px;
+  }
+
+  .user__profile-text .information .info-box span {
+    font-size: 15px;
+    margin-left: 0.5rem;
+  }
+  #content .user_level-container {
+    grid-template-columns: 1fr;
+  }
+
+  #content .circular-progress {
+    height: 180px;
+    width: 180px;
+  }
+
+  #content .value-container {
+    font-size: 35px;
+  }
+}

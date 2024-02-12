@@ -1,0 +1,378 @@
+
+/* Referral Rewards Container  */
+
+.referral_rewards_container {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  grid-gap: 24px;
+  margin-top: 36px;
+}
+
+.referral_rewards {
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  background: var(--light);
+  width: 100%;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  border-radius: 10px;
+  border-bottom: 4px solid var(--light-inverse);
+  font-family: "Poppins", sans-serif;
+}
+
+.referral_rewards .referral_rewards_header {
+  display: block;
+  position: relative;
+  color: var(--dark);
+  margin: auto;
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.referral_rewards__amount {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.referral_rewards__amount p {
+  margin: 10px 10px;
+  color: #000;
+  background: #fdbd4a;
+  padding: 0.4rem .5rem;
+  display: flex;
+  font-size: 20px;
+  font-weight: 500;
+  border-radius: 5px;
+}
+
+.referral_rewards__amount p:after {
+  content: " Tokens";
+  margin-left: 5px;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.referral_rewards_container .claim__div {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.2rem;
+  padding: 3px;
+}
+
+.referral_rewards_container .claim__div .claim__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+  color: #fff;
+  padding: 3px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 20px;
+  letter-spacing: 0.05rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+
+.referral_rewards_container .claim__div .claim__button span {
+  background: #000446;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 6px;
+  width: 100%;
+  height: 100%;
+  transition: all 0.3s ease;
+}
+
+.referral_rewards_container .claim__div .claim__button:hover {
+  transform: translateY(-3%);
+}
+
+.referral_rewards_container .claim__div i {
+  margin-right: 10px;
+  width: 0.9rem;
+  fill: currentColor;
+}
+
+
+
+
+
+/* 	referral link */
+
+#referral {
+  background: var(--light);
+  text-align: center;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 2rem auto;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 24px;
+}
+
+.referral-details {
+  position: relative;
+  overflow: hidden;
+  padding: 10px;
+  height: auto;
+}
+
+#referral .referral-details h1 {
+  font-family: "Old Standard TT", serif;
+  display: inline-block;
+  position: relative;
+  font-size: 30px;
+  color: var(--dark);
+  margin: 0;
+}
+
+/* The most important information about the product */
+#referral .referral-details > p {
+  font-family: "Farsan", cursive;
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 20px;
+  color: var(--dark);
+}
+
+
+.referral-details input{
+  width: 100%;
+  text-overflow: ellipsis;
+  padding: 5px;
+  margin-top: 1rem;
+  background-color: var(--dark);
+  color: var(--light);
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 15px;
+  font-weight: 100;
+  border-radius: 10px;
+  border-bottom: 3px solid var(--blue);
+  transition: all 0.2s ease;
+}
+
+/* control */
+
+.referral-control {
+  display: block;
+  position: relative;
+  padding: 1rem 0 1rem;
+  align-items: center;
+  margin: auto;
+}
+/* the Button */
+.referral-btn {
+  transform: translateY(0px);
+  transition: 0.3s linear;
+  background: #44a70f;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  color: var(--light);
+  padding: 0;
+  margin-top: 2rem;
+}
+
+.referral-btn:hover {
+  transform: translateY(-4px);
+}
+
+.referral-btn .icon {
+  font-family: "Farsan", cursive;
+  transition: transform 0.3s;
+  display: inline-block;
+  padding: 10px 0 10px 10px ;
+  font-size: 1.2em;
+  margin: 0;
+}
+
+.referral-btn span {
+  font-family: "Farsan", cursive;
+  transition: transform 0.3s;
+  display: inline-block;
+  padding: 10px 10px 10px 5px;
+  font-size: 1.2em;
+  margin: 0;
+}
+
+/* copy referral */
+.referral-btn .copy-referral {
+  z-index: 3;
+  font-weight: bolder;
+}
+
+.referral-img {
+  transition: all 0.3s ease-out;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+}
+
+#referral img {
+  width: 100%;
+  height: 100%;
+}
+
+.referral-img:hover img {
+  transition: all 0.3s ease-out;
+}
+
+.referral-img:hover img {
+  transform: scale(1.2, 1.2);
+}
+
+/* table */
+
+.pp__table {
+  height: 65vh;
+  margin-top: 1rem;
+  background-color: var(--table-background-color);
+  box-shadow: 0 0.4rem 0.8rem #0005;
+  border-radius: 0.8rem;
+  overflow: hidden;
+}
+
+.table__header {
+  width: 100%;
+  background-color: rgba(142, 97, 237, 0.669);
+  color: var(--dark);
+  padding: 0.8rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.table__body {
+  width: 95%;
+  color: var(--dark);
+  max-height: calc(89% - 1.6rem);
+  background-color: var(--table-background-color);
+  margin: 0.8rem auto;
+  border-radius: 0.6rem;
+  overflow: auto;
+  overflow: overlay;
+}
+
+.table__body::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+  visibility: hidden;
+}
+
+.table__body::-webkit-scrollbar-thumb {
+  border-radius: 0.5rem;
+  background-color: var(--scroll-thumb-color);
+  visibility: hidden;
+}
+
+.table__body:hover::-webkit-scrollbar {
+  visibility: visible;
+}
+.table__body:hover::-webkit-scrollbar-thumb {
+  visibility: visible;
+}
+
+table {
+  width: 100%;
+}
+
+table,
+th,
+td {
+  border-collapse: collapse;
+  padding: 1rem;
+  text-align: left;
+}
+
+thead th {
+  position: sticky;
+  top: 0;
+  left: 0;
+  color: #fff;
+  background-color: var(--table-hr-color);
+  text-transform: capitalize;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #0000001b;
+}
+
+tbody tr {
+  --delay: 0.1s;
+  transition: 0.5s ease-in-out var(--delay), background-color 0s;
+}
+
+tbody tr.hide {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+tbody tr:hover {
+  background-color: var(--table-hover-color);
+}
+
+tbody tr.hide td,
+tbody tr.hide td p {
+  padding: 0;
+  font: 0 / 0 sans-serif;
+  transition: 0.2s ease-in-out 0.5s;
+}
+
+/* MAIN */
+/* CONTENT */
+
+/* Media Querries  */
+@media screen and (max-width: 768px) {
+  #referral {
+    grid-template-columns: 1fr;
+  }
+
+  .referral-details {
+    padding: 40px;
+  }
+
+}
+
+@media screen and (max-width: 576px) {
+  
+  .referral_rewards_container {
+    grid-template-columns: 1fr;
+  }
+
+
+  .referral-details {
+    padding: 30px;
+  }
+  
+  #referral .referral-details h1 {
+    font-size: 25px;
+  }
+  
+  #referral .referral-details .referral-link {
+    font-size: 12px;
+  }
+  
+}
+
+@media screen and (max-width: 400px) {
+  .referral-details {
+    padding: 10px;
+  }
+
+}
