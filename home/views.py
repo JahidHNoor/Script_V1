@@ -203,10 +203,8 @@ def login(request):
                }
 
     if request.user.is_authenticated:
-        if request.user.is_staff:
-            return redirect('manager_dashboard')
-        else:
-            return redirect('dashboard')
+
+        return redirect('dashboard')
 
     elif request.method == 'POST':
         username = request.POST.get('username')

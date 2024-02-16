@@ -6,8 +6,9 @@ from django.contrib import messages
 from home.models import Profile, Setting
 from django.contrib.sites.models import Site
 from user_app.models import Tic_tac_toe_history, Feature
-from user_app.views.views_common_functions import bonus_percent_function, getting_referrer_profile_function, getting_referrer_referral_rewards_function, getting_referrer_uid_function
-
+from user_app.views.views_common_functions import bonus_percent_function, getting_referrer_profile_function, getting_referrer_referral_rewards_function, getting_referrer_id_function
+from django.db.models import Q
+from django.contrib.auth.models import User
 
 # Create your views here.
 @login_required(login_url='login')
@@ -15,7 +16,7 @@ def tic_tac_toe(request):
 
     # Getting user account access and user data
     profile = Profile.objects.get(user = request.user)
-    user_uid = profile.uid
+    user_id = profile.id
     user_balance = profile.balance
     user_energy = profile.energy
     user_level = profile.level
@@ -27,7 +28,7 @@ def tic_tac_toe(request):
     # Getting Referrer account access
     referrer_profile = getting_referrer_profile_function(referred_by)
     referral_rewards = getting_referrer_referral_rewards_function(referred_by)
-    referrer_uid = getting_referrer_uid_function(referred_by)
+    referrer_id = getting_referrer_id_function(referred_by)
 
     # Getting Settings 
     feature_tic_tac_toe = Feature.objects.get( feature_name = "tic_tac_toe" )
@@ -55,19 +56,75 @@ def tic_tac_toe(request):
                }
 
 
-    if request.method == "POST":
-        roomId = request.POST.get("room-id", None)
-        username = request.POST.get("player-name", "Unknown Player")
-        if(roomId):
-            try:
-                room = Tic_tac_toe_room.objects.get(id=roomId)
-                return redirect(f"/user/tic_tac_toe/game/{username}/{room.id}/")
-            except Tic_tac_toe_room.DoesNotExist:
-                messages.error(request, "Room does not exist.")
-                return redirect("tic_tac_toe")
+    # if request.method == "POST":
+    #     roomId = request.POST.get("room-id", None)
+    #     username = request.POST.get("player-name", "Unknown Player")
+    #     if(roomId):
+    #         try:
+    #             room = Tic_tac_toe_room.objects.get(id=roomId)
+    #             return redirect(f"/user/tic_tac_toe/game/{username}/{room.id}/")
+    #         except Tic_tac_toe_room.DoesNotExist:
+    #             messages.error(request, "Room does not exist.")
+    #             return redirect("tic_tac_toe")
                 
-        else:
-            room = Tic_tac_toe_room.objects.create()
+    #     else:
+    #         room = Tic_tac_toe_room.objects.create()
+    #         return redirect(f"/user/tic_tac_toe/game/{username}/{room.id}/")
+    # return render(request , "user/tic_tac_toe.html" , context)
+
+
+
+    if request.method == "POST":
+        user = User.objects.get(username = request.user)
+        username = user.username
+        available_rooms = Tic_tac_toe_room.objects.all()
+        available_rooms_count = len(list(available_rooms))
+
+
+        if available_rooms_count > 0 :
+            if (Tic_tac_toe_room.objects.filter( player1 = username)) | (Tic_tac_toe_room.objects.filter( player2 = username)):
+                messages.warning(request, "You are already in a match. Finish that first.")
+                return HttpResponseRedirect(request.path_info)
+
+
+        try:
+            room = Tic_tac_toe_room.objects.get(Q(player1 = None) | Q(player2 = None))
+            if(room):
+            
+                if (room.player1 == None) & (room.player2 == None):
+                    Tic_tac_toe_room.objects.filter( id = room.id ).update(  
+                            
+                        player1 = username,
+
+                    )
+                    
+                elif (room.player1 != None) & (room.player2 == None):
+                    Tic_tac_toe_room.objects.filter( id = room.id ).update(  
+                            
+                        player2 = username,
+
+                    )
+                    
+                elif (room.player1 == None) & (room.player2 != None):
+                    Tic_tac_toe_room.objects.filter( id = room.id ).update(  
+                            
+                        player1 = username,
+
+                    )
+                else:
+
+                    messages.error(request, "Room does not exist.")
+                    return redirect("tic_tac_toe")
+                
+                return redirect(f"/user/tic_tac_toe/game/{username}/{room.id}/")
+
+        except Tic_tac_toe_room.DoesNotExist:
+            # messages.error(request, "Room does not exist.")
+            # return redirect("tic_tac_toe")
+            room = Tic_tac_toe_room( 
+                    player1 = username,
+                )
+            room.save()
             return redirect(f"/user/tic_tac_toe/game/{username}/{room.id}/")
     return render(request , "user/tic_tac_toe.html" , context)
 
@@ -88,7 +145,6 @@ def tic_tac_toe2(request, id=None, username=None):
                 "current_site" : current_site,
                 'feature_tic_tac_toe' : feature_tic_tac_toe,
             }
-        
         return render(request, "user/tic_tac_toe_game_page.html", context)
     
     
