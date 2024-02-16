@@ -85,12 +85,13 @@ class GameConsumer(AsyncJsonWebsocketConsumer):
 
                 if content['lastTurn'] == player1_username:
                     turnUser = player2_username
-                turnUser = player1_username
+                else :
+                    turnUser = player1_username
                 await self.channel_layer.group_send(self.group_name, {
                     "type": "gameData.send",
                     "data": {
-                        "event": "game_start",
-                        "board": self.board,
+                        "event": "changeTurn",
+                        "board": content['board'],
                         "turnUser": turnUser,
                         # "myTurn": False,
                     }

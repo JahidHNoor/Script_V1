@@ -9,18 +9,16 @@ let board = {
     const opponentTxtElm = document.getElementById("opponent-txt")
     const turnElm = document.getElementById("tic_tac_toe_turn")
     const boxes = document.getElementsByClassName("tic_tac_toe_box")
-  
+    let data = {}
     Array.from(boxes).forEach((elm, i) => {
         elm.addEventListener("click", e => {
           if(username == data.turnUser){
-  
               myTurn = true
           } 
           else {
   
               myTurn = false
           }
-          console.log(turnUser)
             if(myTurn && !elm.innerHTML && !elm.getAttribute("player")){
                 board[i] = playerLetter
                 ws.send(JSON.stringify({
@@ -64,7 +62,7 @@ let board = {
   
     ws.onmessage = e => {
         console.log(e)
-        const data = JSON.parse(e.data)
+        data = JSON.parse(e.data)
         if(data.event == "show_error"){
             Swal.fire({
                 icon: 'error',
@@ -97,7 +95,7 @@ let board = {
                 }, 500);
             }
         }
-        else if(data.event == "boardData_send"){
+        else if(data.event == "changeTurn"){
             board = data.board
             if(username == data.turnUser){
   
