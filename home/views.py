@@ -230,16 +230,11 @@ def login(request):
         log_user = authenticate(request, username = username, password = password)
 
         if log_user is not None:
-            if log_user.is_staff:
-                auth_login(request, log_user)
-                messages.success(request, "Logged in successfully, Admin.")
-                return redirect('manager_dashboard')
 
-            else:
-                request.session.set_expiry(86400)
-                auth_login(request, log_user)
-                messages.success(request, "Logged in successfully.")
-                return redirect('dashboard')
+            request.session.set_expiry(86400)
+            auth_login(request, log_user)
+            messages.success(request, "Logged in successfully.")
+            return redirect('dashboard')
 
         else:
             messages.error(request, "Invalid Credentials, Please try again.")
