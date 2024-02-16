@@ -6,7 +6,7 @@ from django.contrib import messages
 from home.models import Profile, Setting
 from django.contrib.sites.models import Site
 from user_app.models import Tic_tac_toe_history, Feature
-from user_app.views.views_common_functions import bonus_percent_function, getting_referrer_profile_function, getting_referrer_referral_rewards_function, getting_referrer_id_function
+from user_app.views.views_common_functions import bonus_percent_function, getting_referrer_profile_function, getting_referrer_referral_rewards_function, getting_referrer_uid_function
 from django.db.models import Q
 from django.contrib.auth.models import User
 
@@ -16,7 +16,7 @@ def tic_tac_toe(request):
 
     # Getting user account access and user data
     profile = Profile.objects.get(user = request.user)
-    user_id = profile.id
+    user_uid = profile.uid
     user_balance = profile.balance
     user_energy = profile.energy
     user_level = profile.level
@@ -28,7 +28,7 @@ def tic_tac_toe(request):
     # Getting Referrer account access
     referrer_profile = getting_referrer_profile_function(referred_by)
     referral_rewards = getting_referrer_referral_rewards_function(referred_by)
-    referrer_id = getting_referrer_id_function(referred_by)
+    referrer_uid = getting_referrer_uid_function(referred_by)
 
     # Getting Settings 
     feature_tic_tac_toe = Feature.objects.get( feature_name = "tic_tac_toe" )
